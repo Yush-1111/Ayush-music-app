@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { SignedOut, UserButton } from "@clerk/clerk-react";
+import { UserButton, useUser } from "@clerk/react";
 import { LayoutDashboardIcon, Search } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import SignInOAuthButtons from "./SignInOAuthButtons";
@@ -11,6 +11,7 @@ import axios from "axios";
 
 const Topbar = () => {
   const { isAdmin } = useAuthStore();
+  const { isSignedIn } = useUser(); // ✅ new hook
   const navigate = useNavigate();
 
   const [query, setQuery] = useState("");
@@ -44,7 +45,8 @@ const Topbar = () => {
 
   const handleSearch = async (searchTerm: string) => {
     try {
-      const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000/api";
+      const API_URL =
+        import.meta.env.VITE_API_URL || "http://localhost:5000/api";
       const res = await axios.get(`${API_URL}/search?query=${searchTerm}`);
       setSongs(res.data.songs || []);
       setAlbums(res.data.albums || []);
@@ -68,11 +70,14 @@ const Topbar = () => {
 
   return (
     <div className="flex items-center justify-between p-4 sticky top-0 bg-zinc-900/75 backdrop-blur-md border-b border-zinc-800 z-30">
+      
+      {/* Logo */}
       <div className="flex gap-2 items-center">
         <img src="/spotify.png" className="w-8 h-8" alt="Spotify logo" />
         <span className="font-semibold text-lg text-white">Ayush.Dev</span>
       </div>
 
+      {/* Search */}
       <div className="relative flex-1 mx-4" ref={searchRef}>
         <div className="flex items-center bg-zinc-800 border border-zinc-700 rounded-full px-3">
           <Search className="text-zinc-400 w-4 h-4 mr-2" />
@@ -88,6 +93,8 @@ const Topbar = () => {
 
         {showResults && (songs.length > 0 || albums.length > 0) && (
           <div className="absolute left-0 right-0 mt-2 bg-zinc-900 border border-zinc-800 rounded-xl shadow-lg max-h-80 overflow-y-auto z-40 p-2">
+            
+            {/* Songs */}
             {songs.length > 0 && (
               <div className="mb-3">
                 <h3 className="text-xs uppercase text-zinc-500 mb-1 px-2">Songs</h3>
@@ -106,6 +113,8 @@ const Topbar = () => {
                 ))}
               </div>
             )}
+
+            {/* Albums */}
             {albums.length > 0 && (
               <div>
                 <h3 className="text-xs uppercase text-zinc-500 mb-1 px-2">Albums</h3>
@@ -124,10 +133,12 @@ const Topbar = () => {
                 ))}
               </div>
             )}
+
           </div>
         )}
       </div>
 
+      {/* Right Section */}
       <div className="flex items-center gap-4">
         {isAdmin && (
           <Link to="/admin" className={cn(buttonVariants({ variant: "outline" }))}>
@@ -135,10 +146,10 @@ const Topbar = () => {
             Admin Dashboard
           </Link>
         )}
-        <SignedOut>
-          <SignInOAuthButtons />
-        </SignedOut>
-        <UserButton />
+
+        {/* ✅ Fixed Auth UI */}
+        {!isSignedIn && <SignInOAuthButtons />}
+        {isSignedIn && <UserButton />}
       </div>
     </div>
   );

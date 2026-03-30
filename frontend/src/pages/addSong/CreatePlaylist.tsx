@@ -4,7 +4,7 @@ import { Song } from "@/types";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { usePlayerStore } from "@/stores/usePlayerStore";
+
 import toast from "react-hot-toast";
 import PlayButton from "../home/components/PlayButton";
 
