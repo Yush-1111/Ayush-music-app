@@ -13,6 +13,7 @@ const GetSong = () => {
 	const [isLoading, setIsLoading] = useState(false);
 	const [error, setError] = useState<string | null>(null);
 	const navigate = useNavigate();
+	navigate("/home");
 
 	const { playAlbum } = usePlayerStore(); // player store to play song
 
