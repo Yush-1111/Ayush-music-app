@@ -13,7 +13,7 @@ import { axiosInstance } from "@/lib/axios";
 import { Plus, Upload } from "lucide-react";
 import { useRef, useState } from "react";
 import toast from "react-hot-toast";
-import { useAuth } from "@clerk/clerk-react";
+import { useAuth } from "@clerk/react";
 
 interface NewAlbum {
 	title: string;

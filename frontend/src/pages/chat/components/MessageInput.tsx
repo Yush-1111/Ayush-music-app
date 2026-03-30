@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useChatStore } from "@/stores/useChatStore";
-import { useUser } from "@clerk/clerk-react";
+import { useUser } from "@clerk/react";
 import { Send } from "lucide-react";
 import { useState } from "react";
 

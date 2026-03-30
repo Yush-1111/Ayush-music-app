@@ -1,5 +1,5 @@
 import { Routes, Route } from "react-router-dom";
-import { AuthenticateWithRedirectCallback } from "@clerk/clerk-react";
+import { AuthenticateWithRedirectCallback } from "@clerk/react";
 import { Toaster } from "react-hot-toast";
 
 // Pages & Layouts

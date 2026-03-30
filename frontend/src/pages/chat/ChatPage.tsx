@@ -1,6 +1,6 @@
 import Topbar from "@/components/Topbar";
 import { useChatStore } from "@/stores/useChatStore";
-import { useUser } from "@clerk/clerk-react";
+import { useUser } from "@clerk/react";
 import { useEffect } from "react";
 import UsersList from "./components/UsersList";
 import ChatHeader from "./components/ChatHeader";
