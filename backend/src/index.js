@@ -34,9 +34,12 @@ initializeSocket(httpServer);
 
 app.use(
 	cors({
-		origin: "http://localhost:3000",
-		credentials: true,
-	})
+    origin: [
+      "http://localhost:3000",
+      "https://ayush-music-app-1.vercel.app"
+    ],
+    credentials: true,
+  })
 );
 
 app.use(express.json()); // to parse req.body
