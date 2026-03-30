@@ -4,7 +4,7 @@ import { Song } from "@/types";
 import { Button } from "@/components/ui/button";
 import SectionGridSkeleton from "../home/components/SectionGridSkeleton";
 import PlayButton from "../home/components/PlayButton";
-import { useNavigate } from "react-router-dom";
+
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { usePlayerStore } from "@/stores/usePlayerStore";
 
@@ -12,8 +12,7 @@ const GetSong = () => {
 	const [songs, setSongs] = useState<Song[]>([]);
 	const [isLoading, setIsLoading] = useState(false);
 	const [error, setError] = useState<string | null>(null);
-	const navigate = useNavigate();
-	navigate("/home");
+	
 
 	const { playAlbum } = usePlayerStore(); // player store to play song
 
